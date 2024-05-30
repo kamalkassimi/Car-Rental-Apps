@@ -12,7 +12,7 @@ class DatabaseHelper {
   factory DatabaseHelper() => _instance;
 
   static Database? _db;
-
+//how to view sqlite table in vscode
   DatabaseHelper.internal();
 
   Future<Database> get db async {
@@ -22,28 +22,20 @@ class DatabaseHelper {
     _db = await initDb();
     return _db!;
   }
+  
 Future<Database> initDb() async {
     final databasePath = await getDatabasesPath();
+  print("linnnnnnnnnnnnnnnne    ${databasePath}");
     final path = join(databasePath, 'users.db');
     return await openDatabase(
       path,
-      version: 8,
+      version: 12,
       onCreate: (db, version) async {
         await _onCreate(db, version);
         await _onCreateContracts(db, version); // Add this line
       },
     );
   }
-  // Future<Database> initDb() async {
-  //   final databasePath = await getDatabasesPath();
-  //   final path = join(databasePath, 'users.db');
-  //   return await openDatabase(
-  //     path,
-  //     version: 6,
-  //     onCreate: _onCreate,
-      
-  //   );
-  // }
 
   FutureOr<void> _onCreate(Database db, int version) async {
     await db.execute(
@@ -55,6 +47,12 @@ Future<Database> initDb() async {
     print(user["password"]);
     return await dbClient.insert('users', user);
   }
+Future<int> saveContract(Map<String, dynamic> contract) async {
+  var dbClient = await db;
+  print(contract);
+  return await dbClient.insert('contracts', contract);
+}
+
 
  Future<Map<String, dynamic>?> getUser(String email, String password) async {
   var dbClient = await db;
@@ -77,46 +75,57 @@ Future<void> _onCreateContracts(Database db, int version) async {
       dateDebut TEXT,
       dateFin TEXT,
       cin TEXT,
-      permis TEXT,
       imageCin TEXT,
       imagePermis TEXT
     )
   ''');
 }
 
-Future<int> saveContract(Map<String, dynamic> contract) async {
-  var dbClient = await db;
-  print(contract);
-  return await dbClient.insert('contracts', contract);
-}
 
-
-  // Future<void> _createDb(Database db, int version) async {
-  //   await db.execute('''
-  //     CREATE TABLE contracts (
-  //       id INTEGER PRIMARY KEY AUTOINCREMENT,
-  //       startDate INTEGER,
-  //       endDate INTEGER,
-  //       cin TEXT,
-  //       permisNumero TEXT,
-  //       imageCinPath TEXT,
-  //       imagePermisPath TEXT,
-  //       name TEXT,
-  //       surname TEXT
-  //     )
-  //   ''');
-  // }
-
-
-
-  // Future<int> insertContract(Contract contract) async {
-  //   Database db = await instance.db;
-  //   return await db.insert('contracts', contract.toMap());
-  // }
+  Future<List<Map<String, dynamic>>> getUsers() async {
+    final db = await instance.db;
+    return await db.query('users');
+  }
 
   Future<List<Contract>> getAllContracts() async {
     Database db = await instance.db;
     List<Map<String, dynamic>> maps = await db.query('contracts');
     return List.generate(maps.length, (index) => Contract.fromMap(maps[index]));
+  }
+
+Future<String?> getItem(int id) async {
+    final db = await instance.db;
+    List<Map<String, dynamic>> maps = await db.query(
+      'users',
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+    if (maps.isNotEmpty) {
+      return maps.first['name'];
+    }
+    return null;
+  }
+   Future<Map<String, dynamic>> getItemAndAllNames(int id) async {
+    final db = await instance.db;
+
+    // Get single item name by id
+    List<Map<String, dynamic>> itemResult = await db.query(
+      'items',
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+    String? itemName;
+    if (itemResult.isNotEmpty) {
+      itemName = itemResult.first['name'];
+    }
+
+    // Get all item names
+    List<Map<String, dynamic>> allItemsResult = await db.query('items');
+    List<String> allItemNames = allItemsResult.map((item) => item['name'] as String).toList();
+
+    return {
+      'itemName': itemName,
+      'allItemNames': allItemNames,
+    };
   }
 }

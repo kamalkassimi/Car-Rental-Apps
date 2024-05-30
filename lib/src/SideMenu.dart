@@ -1,15 +1,19 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_car_app/main.dart';
 import 'package:flutter_car_app/src/contrat.dart';
 
 class SideMenu extends StatelessWidget {
+  final String email;
+
   const SideMenu({
+    required this.email,
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const MyHomePage();
+    return MyHomePage(email: email); // Pass the email to MyHomePage
   }
 }
 
@@ -23,6 +27,7 @@ class DrawerListTitle extends StatelessWidget {
   final IconData icon;
   final String title;
   final VoidCallback onTap;
+
   @override
   Widget build(BuildContext context) {
     return ListTile(
@@ -42,7 +47,12 @@ class DrawerListTitle extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+  final String email; // Define email as a field in MyHomePage
+
+  const MyHomePage({
+    required this.email,
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -50,6 +60,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
+
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -59,36 +70,66 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      // Add a ListView to the drawer. This ensures the user can scroll
-      // through the options in the drawer if there isn't enough vertical
-      // space to fit everything.
-      width: MediaQuery.of(context).size.width / 1.5,
       child: ListView(
-        shrinkWrap: true,
+        padding: const EdgeInsets.all(0),
         children: [
-          SizedBox(
-            height: 100,
-            child: DrawerHeader(child: Image.asset("images_Cars/logo_app.jpg")),
+          DrawerHeader(
+            decoration: BoxDecoration(
+              color: Color.fromARGB(255, 76, 175, 92),
+            ),
+            child: UserAccountsDrawerHeader(
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 76, 175, 79),
+              ),
+              accountName: Text(
+                widget.email, // Access email from widget
+                style: TextStyle(fontSize: 18),
+              ),
+              accountEmail: Text(widget.email), // Access email from widget
+              currentAccountPictureSize: Size.square(50),
+              currentAccountPicture: CircleAvatar(
+                backgroundColor: Color.fromARGB(197, 137, 249, 255),
+                child: Text(
+                  widget.email[0],
+                  style: TextStyle(
+                    fontSize: 30.0,
+                    color: Color.fromARGB(255, 175, 101, 76),
+                  ),
+                ),
+              ),
+            ),
           ),
-          DrawerListTitle(icon: Icons.home, title: 'Acceuil', onTap: () {}),
-          DrawerListTitle(
-              icon: Icons.work,
-              title: 'Services',
-              onTap: () {
-                serviceOption(context);
-              }),
-          DrawerListTitle(icon: Icons.login, title: 'Login in', onTap: () {}),
-          DrawerListTitle(
-            icon: Icons.info,
-            title: "About us",
-            onTap: () {},
+          ListTile(
+            leading: Icon(Icons.book),
+            title: Text("My Course"),
+          ),
+          ListTile(
+            leading: Icon(Icons.workspace_premium),
+            title: Text("service"), onTap: () {
+              serviceOption(context);
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.video_label),
+            title: Text("Saved Videos"),
+            onTap: (){},
+          ),
+          ListTile(
+            leading: Icon(Icons.edit),
+            title: Text("Edit Profile"),
+            onTap: (){},
+          ),
+          ListTile(
+            leading: Icon(Icons.logout),
+            title: Text("Logout"),
+            onTap: (){},
           ),
         ],
       ),
     );
   }
-
-  void serviceOption(BuildContext context) {
+}
+void serviceOption(BuildContext context) {
     showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -108,7 +149,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   title: const Text('Contrat'),
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) =>  ContratPage()));
+                        builder: (context) => const Contrat()));
                   },
                 ),
               ],
@@ -116,4 +157,4 @@ class _MyHomePageState extends State<MyHomePage> {
           );
         });
   }
-}
+

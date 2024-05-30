@@ -17,89 +17,7 @@ class Voiture {
   String imageUrl;
 }
 
-// const  items = [
-//   Voiture(marque: 'Mercedes-Benz', name: "Item 1", price: '16', imageUrl: 'images_Cars/ertiga-exterior-right-front-three-quarter-5.webp'),
-//   Voiture(marque: 'Mercedes-Benz', name: "Item 2", price: "19", imageUrl: 'images_Cars/i20-exterior-right-front-three-quarter-7.webp')
-//   {
-//     "marque": 'Mercedes-Benz',
-//     "name": "Item 3",
-//     "image":
-//         'images_Cars/innova-crysta-exterior-right-front-three-quarter-2.webp',
-//     "price": "10"
-//   },
 
-//   {
-//     "marque": 'Peugeot',
-//     "name": "Item 2",
-//     "image": 'images_Cars/i20-exterior-right-front-three-quarter-7.webp',
-//     "price": "9"
-//   },
-//   {
-//     "marque": 'Peugeot',
-//     "name": "Item 3",
-//     "image":
-//         'images_Cars/innova-crysta-exterior-right-front-three-quarter-2.webp',
-//     "price": "84"
-//   },
-//   {
-//     "marque": 'Peugeot',
-//     "name": "Item 1",
-//     "image": 'images_Cars/ertiga-exterior-right-front-three-quarter-5.webp',
-//     "price": "17"
-//   },
-//   {
-//     "marque": 'Peugeot',
-//     "name": "Item 2",
-//     "image": 'images_Cars/i20-exterior-right-front-three-quarter-7.webp',
-//     "price": "29"
-//   },
-//   {
-//     "marque": "Dacia",
-//     "name": "Item 3",
-//     "image":
-//         'images_Cars/innova-crysta-exterior-right-front-three-quarter-2.webp',
-//     "price": "36"
-//   },
-//   {
-//     "marque": "Dacia",
-//     "name": "Item 1",
-//     "image": 'images_Cars/ertiga-exterior-right-front-three-quarter-5.webp',
-//     "price": "27"
-//   },
-//   {
-//     "marque": 'Bentley',
-//     "name": "Item 2",
-//     "image": 'images_Cars/i20-exterior-right-front-three-quarter-7.webp',
-//     "price": "32"
-//   },
-//   {
-//     "marque": 'Mercedes-Benz',
-//     "name": "Item 3",
-//     "image":
-//         'images_Cars/innova-crysta-exterior-right-front-three-quarter-2.webp',
-//     "price": "29"
-//   },
-//   {
-//     "marque": 'Peugeot',
-//     "name": "Item 1",
-//     "image": 'images_Cars/ertiga-exterior-right-front-three-quarter-5.webp',
-//     "price": "14"
-//   },
-//   {
-//     "marque": 'Opel',
-//     "name": "Item 2",
-//     "image": 'images_Cars/i20-exterior-right-front-three-quarter-7.webp',
-//     "price": "24"
-//   },
-//   {
-//     "marque": "Dacia",
-//     "name": "Item 3",
-//     "image":
-//         'images_Cars/innova-crysta-exterior-right-front-three-quarter-2.webp',
-//     "price": "8"
-//   },
-//   // Add more items as needed
-// ];
 var items = <Voiture>[
   Voiture(
       marque: 'Mercedes-Benz',
@@ -241,7 +159,7 @@ class GridItem extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.all(10),
                         child: Text(
-                          price + "\$ /month",
+                          price + "\DH /month",
                           style: const TextStyle(
                             fontSize: 13,
                             fontWeight: FontWeight.bold,
@@ -433,7 +351,7 @@ class _DarkView extends State<MyApp> {
               ),
             ],
           ),
-          drawer: const SideMenu(),
+          // drawer: const SideMenu(email: email),
           body: const HomePageDrop(),
         ));
   }

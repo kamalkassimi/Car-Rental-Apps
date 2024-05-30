@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-
-
-
 class MyAppTest extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -37,7 +34,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-
 class ListViewWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -55,7 +51,7 @@ class ListViewWidget extends StatelessWidget {
 class PlaceholderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Text(
         'View is Disabled',
         style: TextStyle(fontSize: 20),

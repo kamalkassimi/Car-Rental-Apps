@@ -9,7 +9,10 @@ const Color darkBlue = Color.fromARGB(255, 18, 40, 47);
 // }
 
 class MyApp11_part extends StatelessWidget {
-  const MyApp11_part({Key? key}) : super(key: key);
+  
+   final String email1 ;
+  // ignore: use_super_parameters
+  const MyApp11_part({required this.email1 ,Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +27,7 @@ class MyApp11_part extends StatelessWidget {
           ),
           centerTitle: true,
         ),
-        drawer: const SideMenu(),
+        drawer:  SideMenu(email : email1),
         body: Center(
           child: ExampleParallax(),
         ),
@@ -140,6 +143,22 @@ class LocationListItem extends StatelessWidget {
   }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 class Location {
   const Location({
     required this.name,
@@ -181,42 +200,3 @@ const locations = [
 ];
  
  
-// void main() {
-//   runApp(const MyApp());
-// }
- 
-// class MyApp11_part extends StatelessWidget {
-//   const MyApp11_part({Key? key}) : super(key: key);
- 
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       theme: ThemeData.dark().copyWith(scaffoldBackgroundColor: darkBlue),
-//       debugShowCheckedModeBanner: false,
-//       home: const CarsView(),
-//     );
-//   }
-// }
- 
-// const Color darkBlue = Color.fromARGB(255, 18, 40, 47);
- 
-// class CarsView extends StatefulWidget implements PreferredSizeWidget {
-//   @override
-//   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
- 
-//   const CarsView({Key? key}) : super(key: key);
- 
-//   @override
-//   _CarsViewState createState() => _CarsViewState();
-// }
- 
-// class _CarsViewState extends State<CarsView> {
-//   final GlobalKey<ScaffoldState> _key = GlobalKey();
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       key: _key,
-     
-//     );
-//   }
-// }

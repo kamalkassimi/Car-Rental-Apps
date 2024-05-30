@@ -15,7 +15,6 @@ class MyAppDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Your App Title',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -111,27 +110,27 @@ class _BookCarState extends State<BookCar> {
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: Text(
                           widget.car.model,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.black,
                             fontSize: 36,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 16),
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: Text(
                           widget.car.brand,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.grey,
                             fontSize: 14,
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                       Expanded(
@@ -143,17 +142,17 @@ class _BookCarState extends State<BookCar> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             buildPricePerPeriod(
-                                "2", "12", "4.350", selectedPeriod == "2"),
+                                "2", "2", "100", selectedPeriod == "2"),
                             SizedBox(width: 16),
                             buildPricePerPeriod(
-                                "3", "6", "4.800", selectedPeriod == "3"),
+                                "3", "6", "300", selectedPeriod == "3"),
                             SizedBox(width: 16),
                             buildPricePerPeriod(
-                                "4", "1", "5.100", selectedPeriod == "4"),
+                                "4", "1", "400", selectedPeriod == "4"),
                           ],
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                       Row(
@@ -197,34 +196,34 @@ class _BookCarState extends State<BookCar> {
   Widget buildSpecificationCar(String title, String data) {
     return Container(
       width: 120,
-      decoration: BoxDecoration(
-        color: const Color.fromARGB(255, 255, 255, 255),
+      decoration: const BoxDecoration(
+        color: Color.fromARGB(255, 255, 255, 255),
         borderRadius: BorderRadius.all(
           Radius.circular(15),
         ),
       ),
-      padding: EdgeInsets.symmetric(
+      padding: const EdgeInsets.symmetric(
         vertical: 8,
         horizontal: 16,
       ),
-      margin: EdgeInsets.only(right: 16),
+      margin: const EdgeInsets.only(right: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
             title,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.grey,
               fontSize: 14,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 8,
           ),
           Text(
             data,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.black,
               fontSize: 18,
               fontWeight: FontWeight.bold,
@@ -249,7 +248,7 @@ class _BookCarState extends State<BookCar> {
           padding: EdgeInsets.all(16),
           decoration: BoxDecoration(
             color: selected ? kPrimaryColor : Colors.white,
-            borderRadius: BorderRadius.all(
+            borderRadius: const BorderRadius.all(
               Radius.circular(15),
             ),
             border: Border.all(

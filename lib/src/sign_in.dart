@@ -23,10 +23,18 @@ class _SignUpState extends State<SignUpPage> {
   bool _isPasswordValid = false;
   bool _hasPasswordOneNumber = false;
   GlobalKey<FormState> formState = GlobalKey<FormState>();
-  TextEditingController firstName = TextEditingController();
-  TextEditingController lastName = TextEditingController();
+  static TextEditingController firstName = TextEditingController();
+  static TextEditingController lastName = TextEditingController();
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
+
+//  static String get getFirstName => firstName.text;
+
+//   // Getter for last name
+//  static String get getLastName => lastName.text;
+  //   Future<List<Map<String, dynamic>>> getUsers() async {
+  //   return await dbHelper.getAllUsers();
+  // }
   final dbHelper = DatabaseHelper();
 
   createAccount(BuildContext context) async {

@@ -20,6 +20,7 @@ class MyForm extends StatefulWidget {
 
 class _MyFormState extends State<MyForm> {
   final _formKey = GlobalKey<FormState>();
+  
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   final dbHelper = DatabaseHelper();
@@ -57,9 +58,10 @@ class _MyFormState extends State<MyForm> {
       var user = await dbHelper.getUser(email, password);
       print(user);
       if (user != null) {
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => const MyApp11_part(),
-        ));
+        Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => MyApp11_part(email1: email),
+                  ),);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Invalid email or password')),
@@ -199,6 +201,7 @@ class _MyFormState extends State<MyForm> {
                             child: MaterialButton(
                               onPressed: () {
                                 _submitForm();
+
                               },
                               height: 50,
                               minWidth: double.infinity,

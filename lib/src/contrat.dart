@@ -1,16 +1,19 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter_car_app/src/contrat_pdf.dart';
+import 'package:flutter_car_app/src/contrat_info.dart';
 import 'package:flutter_car_app/src/database.dart';
+import 'package:flutter_car_app/src/sign_in.dart';
 import 'package:image_picker/image_picker.dart';
+
 class Contract {
+
   final int id;
   final String name;
   final String surname;
   final String dateDebut;
   final String dateFin;
   final String cin;
-  final String permis;
+  // final String permis;
   final String imageCin;
   final String imagePermis;
 
@@ -21,7 +24,7 @@ class Contract {
     required this.dateDebut,
     required this.dateFin,
     required this.cin,
-    required this.permis,
+    // required this.permis,
     required this.imageCin,
     required this.imagePermis,
   });
@@ -34,12 +37,12 @@ class Contract {
       dateDebut: map['dateDebut'],
       dateFin: map['dateFin'],
       cin: map['cin'],
-      permis: map['permis'],
+      // permis: map['permis'],
       imageCin: map['imageCin'],
       imagePermis: map['imagePermis'],
     );
   }
-   Map<String, dynamic> toMap() {
+  Map<String, dynamic> toMap() {
     return {
       'id': id,
       'name': name,
@@ -47,7 +50,7 @@ class Contract {
       'dateDebut': dateDebut,
       'dateFin': dateFin,
       'cin': cin,
-      'permis': permis,
+      // 'permis': permis,
       'imageCin': imageCin,
       'imagePermis': imagePermis,
     };
@@ -55,7 +58,9 @@ class Contract {
 }
 
 class Contrat extends StatelessWidget {
+  
   const Contrat({Key? key}) : super(key: key);
+  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -63,18 +68,38 @@ class Contrat extends StatelessWidget {
     );
   }
 }
+
 class ContratPage extends StatefulWidget {
   @override
   _ContratPageState createState() => _ContratPageState();
 }
 
+
+
 class _ContratPageState extends State<ContratPage> {
   DateTime? dateDebut;
   DateTime? dateFin;
+    final DatabaseHelper _dbHelper = DatabaseHelper();
+    Future<void> _fetchData() async {
+    String? item = await _dbHelper.getItem(1); 
+    if (item != null) {
+      setState(() {
+        _permisController.text = item;
+      });
+    }
+  }
+   @override
+  void initState() {
+    super.initState();
+    _fetchData();
+  }
+   
   final TextEditingController _cinController = TextEditingController();
   final TextEditingController _permisController = TextEditingController();
   XFile? imageCin;
   XFile? imagePermis;
+  // ignore: non_constant_identifier_names
+  // final _SignUpState1 = _SignUpState();
   final ImagePicker _picker = ImagePicker();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _surnameController = TextEditingController();
@@ -96,6 +121,7 @@ class _ContratPageState extends State<ContratPage> {
       });
     }
   }
+
   Future<void> _pickImage(bool isCin) async {
     final XFile? pickedFile =
         await _picker.pickImage(source: ImageSource.gallery);
@@ -111,9 +137,10 @@ class _ContratPageState extends State<ContratPage> {
   }
 
   bool validationChamps() {
-    return dateDebut != null &&
+    return 
+        dateDebut != null &&
         dateFin != null &&
-        _cinController.text.isNotEmpty &&
+        // _cinController.text.isNotEmpty &&
         _permisController.text.isNotEmpty &&
         imageCin != null &&
         imagePermis != null &&
@@ -146,7 +173,7 @@ class _ContratPageState extends State<ContratPage> {
         'dateDebut': dateDebut.toString(),
         'dateFin': dateFin.toString(),
         'cin': _cinController.text,
-        'permis': _permisController.text,
+        // 'permis': _permisController.text,
         'imageCin': imageCin!.path,
         'imagePermis': imagePermis!.path,
       });
@@ -157,7 +184,7 @@ class _ContratPageState extends State<ContratPage> {
             dateDebut: dateDebut,
             dateFin: dateFin,
             cin: _cinController.text,
-            permisNumero: _permisController.text,
+            // permisNumero: _permisController.text,
             imageCinPath: imageCin!.path,
             imagePermisPath: imagePermis!.path,
             name: _nameController.text,
@@ -169,6 +196,7 @@ class _ContratPageState extends State<ContratPage> {
       message("Les champs ne sont pas valides.");
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -209,7 +237,7 @@ class _ContratPageState extends State<ContratPage> {
                 controller: _surnameController,
                 decoration: const InputDecoration(
                   labelText: 'Prenom ',
-                  border: InputBorder.none,
+                                border: InputBorder.none,
                   contentPadding: EdgeInsets.symmetric(horizontal: 15.0),
                 ),
               ),
@@ -244,7 +272,8 @@ class _ContratPageState extends State<ContratPage> {
                 ),
               ),
             ),
-            Container(              margin: const EdgeInsets.all(10.0),
+            Container(
+              margin: const EdgeInsets.all(10.0),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10.0),
                 border: Border.all(
