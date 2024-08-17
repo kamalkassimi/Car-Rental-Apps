@@ -28,14 +28,13 @@ class MyApp11_part extends StatelessWidget {
           centerTitle: true,
         ),
         drawer:  SideMenu(email : email1),
-        body: Center(
+        body: const Center(
           child: ExampleParallax(),
         ),
       ),
     );
   }
 }
-
 class ExampleParallax extends StatelessWidget {
   const ExampleParallax({Key? key}) : super(key: key);
 

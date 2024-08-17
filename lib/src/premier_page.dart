@@ -78,7 +78,7 @@ class HomePage extends StatelessWidget {
         child: ElevatedButton(
           onPressed: () {
             Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => const MyApp11_part(email1: "")));
+                MaterialPageRoute(builder: (context) => const MyApp11_part(email1: "usertest20@gmail.com")));
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.blue,

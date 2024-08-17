@@ -1,4 +1,4 @@
-#Thu May 30 09:43:02 WEST 2024
+#Fri May 31 14:52:40 WEST 2024
 base.0=C\:\\Users\\m\\OneDrive - OFPPT\\Bureau\\projets_Flutter\\flutter_car_app\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
 path.0=classes.dex
 renamed.0=classes.dex

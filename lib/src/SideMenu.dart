@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_car_app/main.dart';
 import 'package:flutter_car_app/src/contrat.dart';
+import 'package:flutter_car_app/src/login.dart';
 
 class SideMenu extends StatelessWidget {
   final String email;
@@ -75,7 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
         children: [
           DrawerHeader(
             decoration: BoxDecoration(
-              color: Color.fromARGB(255, 76, 175, 92),
+              color: const Color.fromARGB(255, 76, 175, 92),
             ),
             child: UserAccountsDrawerHeader(
               decoration: BoxDecoration(
@@ -99,13 +100,13 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
           ),
-          ListTile(
+          const ListTile(
             leading: Icon(Icons.book),
-            title: Text("My Course"),
+            title: Text("My profile"),
           ),
           ListTile(
-            leading: Icon(Icons.workspace_premium),
-            title: Text("service"), onTap: () {
+            leading: const Icon(Icons.workspace_premium),
+            title: const Text("service"), onTap: () {
               serviceOption(context);
             },
           ),
@@ -122,7 +123,11 @@ class _MyHomePageState extends State<MyHomePage> {
           ListTile(
             leading: Icon(Icons.logout),
             title: Text("Logout"),
-            onTap: (){},
+            onTap: (){
+               Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => MyForm()));
+                  
+            },
           ),
         ],
       ),
